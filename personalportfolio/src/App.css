@@ -627,34 +627,48 @@ h2, h3 {
     margin-bottom: 1.2rem;
     min-height: unset;
     padding-top: 0.5rem;
+    width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
-  .portfolio-header-left, .portfolio-header-details {
-    align-items: center;
-    margin-top: 0;
+  .portfolio-header-details {
+    order: 1;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding-left: 2vw;
+    padding-right: 2vw;
   }
-  .contact-toggle-bar {
-    padding-right: 1vw;
-    margin-top: 0.7rem;
+  .portfolio-header-left {
+    order: 2;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  .portfolio-bio {
+    font-size: 1.05rem;
+    padding: 1rem 0.7rem;
+    text-align: left;
+    word-break: break-word;
   }
   .profile-photo {
     width: 90vw;
     max-width: 320px;
     height: auto;
-    min-width: 180px;
+    min-width: 120px;
     border-radius: 18px;
-  }
-  .portfolio-header-details {
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .portfolio-name {
-    font-size: 2.1rem;
-  }
-  .portfolio-bio {
-    font-size: 1.05rem;
   }
   .portfolio-section {
     padding: 1.1rem 0.5rem;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  .contact-toggle-bar {
+    padding-right: 1vw;
+    margin-top: 0.7rem;
   }
   .contact-toggle-btn {
     font-size: 1rem;
@@ -878,6 +892,113 @@ button:hover, .back-to-top-btn:hover, .notfound-home-btn:hover {
   }
 }
 
+/* Blog post card professional styles */
+.blog-post-card {
+  background: #fff7ef;
+  border-radius: 1.2rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.10);
+  transition: transform 0.25s cubic-bezier(.25,.8,.25,1), box-shadow 0.25s;
+  width: 340px;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 1.2rem 0;
+  margin-bottom: 2.2rem;
+  overflow: hidden;
+  position: relative;
+}
+.blog-post-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12);
+}
+.blog-post-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  margin-bottom: 1rem;
+}
+.blog-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.2rem;
+  font-size: 0.98rem;
+  color: #a98c6b;
+  margin: 0 1.2rem 0.2rem 1.2rem;
+  align-items: center;
+}
+.blog-post-date {
+  font-weight: 500;
+}
+.blog-post-author {
+  font-style: italic;
+}
+.blog-post-tags {
+  display: flex;
+  gap: 0.4rem;
+}
+.blog-post-tag {
+  background: #e6d3b3;
+  color: #7a4a1e;
+  border-radius: 0.7em;
+  padding: 0.1em 0.7em;
+  font-size: 0.93em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.blog-post-title {
+  font-size: 1.35rem;
+  color: #7a4a1e;
+  font-weight: 700;
+  margin: 0.7rem 1.2rem 0.3rem 1.2rem;
+  line-height: 1.2;
+}
+.blog-post-summary {
+  font-size: 1.08rem;
+  color: #4e2c0c;
+  margin: 0 1.2rem 1.2rem 1.2rem;
+  line-height: 1.6;
+}
+.blog-readmore-btn {
+  background: #e67e22;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.6rem 1.6rem;
+  font-size: 1.08rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 1.2rem;
+  margin-top: auto;
+  box-shadow: 0 2px 8px rgba(13,59,102,0.08);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.blog-readmore-btn:hover, .blog-readmore-btn:focus {
+  background: #7a4a1e;
+  color: #fff7ef;
+  transform: translateY(-2px) scale(1.04);
+}
+@media (max-width: 700px) {
+  .blog-post-card {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 0 0 0.7rem 0;
+  }
+  .blog-post-image {
+    height: 120px;
+  }
+  .blog-post-title, .blog-post-summary, .blog-post-meta {
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+  }
+  .blog-readmore-btn {
+    margin-left: 0.7rem;
+  }
+}
+
 .portfolio-navbar {
   width: 100%;
   display: flex;
@@ -944,12 +1065,50 @@ button:hover, .back-to-top-btn:hover, .notfound-home-btn:hover {
 }
 @media (max-width: 700px) {
   .portfolio-navbar {
-    gap: 1.1rem;
-    font-size: 1rem;
-    padding: 0.7rem 1vw 0.3rem 1vw;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+    padding: 1.2rem 2vw 0.7rem 2vw;
+    box-shadow: 0 2px 8px rgba(31,38,135,0.07);
+    background: rgba(255,255,255,0.95);
+    position: relative;
+    z-index: 2;
   }
   .navbar-link {
-    padding: 0.3em 0.7em;
+    min-height: 44px;
+    font-size: 1.13rem;
+    padding: 0.7em 0.7em;
+    text-align: left;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .blog-container {
+    padding-top: 2.5rem;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .portfolio-container {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  html, body {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .blog-title {
+    font-size: 2rem;
+  }
+  .blog-post-title {
+    font-size: 1.13rem;
+  }
+  .blog-post-summary {
+    font-size: 1rem;
   }
 }
 
@@ -1048,4 +1207,70 @@ button:hover, .back-to-top-btn:hover, .notfound-home-btn:hover {
   padding: 0.4em 1.2em;
   display: inline-block;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Fade-slide-in animation */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: none; }
+}
+
+.portfolio-header, .projects-section, .testimonials-section, .portfolio-footer, .blog-container {
+  animation: fadeSlideIn 1.1s cubic-bezier(.25,.8,.25,1) 0.1s both;
+}
+
+/* Modal animation */
+.modal-overlay {
+  animation: fadeSlideIn 0.5s cubic-bezier(.25,.8,.25,1);
+}
+
+/* Card and button hover transitions */
+.project-card, .blog-post-card, .testimonial-card, .navbar-link, .portfolio-section, .portfolio-bio, .contact-modal-content {
+  transition: box-shadow 0.35s cubic-bezier(.25,.8,.25,1), transform 0.35s cubic-bezier(.25,.8,.25,1), background 0.35s, color 0.25s;
+}
+
+button, .back-to-top-btn, .notfound-home-btn {
+  transition: background 0.25s cubic-bezier(.25,.8,.25,1), color 0.25s cubic-bezier(.25,.8,.25,1), transform 0.25s cubic-bezier(.25,.8,.25,1), box-shadow 0.25s cubic-bezier(.25,.8,.25,1);
+}
+
+a, .navbar-link {
+  transition: color 0.25s cubic-bezier(.25,.8,.25,1), background 0.25s cubic-bezier(.25,.8,.25,1), transform 0.25s cubic-bezier(.25,.8,.25,1);
+}
+
+/* Animated icon entrance for tech stack and contact/social icons */
+.techstack-icons div, .contact-icons a, .portfolio-footer .contact-icons a {
+  opacity: 0;
+  transform: translateY(24px) scale(0.92) rotate(-6deg);
+  animation: iconFadeIn 0.7s cubic-bezier(.25,.8,.25,1) forwards;
+}
+.techstack-icons div:nth-child(1), .contact-icons a:nth-child(1) { animation-delay: 0.1s; }
+.techstack-icons div:nth-child(2), .contact-icons a:nth-child(2) { animation-delay: 0.2s; }
+.techstack-icons div:nth-child(3), .contact-icons a:nth-child(3) { animation-delay: 0.3s; }
+.techstack-icons div:nth-child(4), .contact-icons a:nth-child(4) { animation-delay: 0.4s; }
+.techstack-icons div:nth-child(5), .contact-icons a:nth-child(5) { animation-delay: 0.5s; }
+.techstack-icons div:nth-child(6), .contact-icons a:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes iconFadeIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Icon hover animation */
+.techstack-icons div:hover, .contact-icons a:hover, .portfolio-footer .contact-icons a:hover {
+  transform: scale(1.18) rotate(6deg);
+  filter: brightness(1.2) drop-shadow(0 2px 8px #e67e22cc);
+  background: #e67e22;
+  color: #fff;
+}
+.techstack-icons div:active, .contact-icons a:active, .portfolio-footer .contact-icons a:active {
+  transform: scale(0.96) rotate(-3deg);
+  filter: brightness(0.9);
+}
+
+/* Make sure icon text stays readable on hover */
+.techstack-icons div span {
+  color: inherit;
+  transition: color 0.2s;
 }

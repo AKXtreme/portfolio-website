@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css'
 import profileImg from './assets/photo_2025-07-20_01-04-46.jpg';
 import akmessageImg from './assets/message .png';
@@ -12,9 +12,64 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showProjects, setShowProjects] = useState(false);
+  const vantaRef = useRef(null);
+  const vantaEffect = useRef(null);
+
+  useEffect(() => {
+    let scriptThree, scriptVanta;
+    function loadVanta() {
+      if (!window.VANTA) {
+        scriptVanta = document.createElement('script');
+        scriptVanta.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js';
+        scriptVanta.async = true;
+        document.body.appendChild(scriptVanta);
+        scriptVanta.onload = initVanta;
+      } else {
+        initVanta();
+      }
+    }
+    function initVanta() {
+      if (!vantaEffect.current && window.VANTA && window.VANTA.FOG && vantaRef.current) {
+        vantaEffect.current = window.VANTA.FOG({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          highlightColor: 0x7a4a1e, // warm brown highlight
+          midtoneColor: 0xf5e9da, // soft beige midtone
+          lowlightColor: 0x1a2233, // deep blue lowlight
+          baseColor: 0xf5e9da, // soft beige base
+          blurFactor: 0.7,
+          speed: 1.2
+        });
+      }
+    }
+    if (!window.THREE) {
+      scriptThree = document.createElement('script');
+      scriptThree.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+      scriptThree.async = true;
+      document.body.appendChild(scriptThree);
+      scriptThree.onload = loadVanta;
+    } else {
+      loadVanta();
+    }
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
+      }
+      if (scriptThree) document.body.removeChild(scriptThree);
+      if (scriptVanta) document.body.removeChild(scriptVanta);
+    };
+  }, []);
 
   return (
     <main className="portfolio-container">
+      <div id="animated-bg" ref={vantaRef} style={{position: 'fixed', zIndex: 0, top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none'}} aria-hidden="true"></div>
       <nav className="portfolio-navbar">
         <Link to="/" className="navbar-link">Home</Link>
         <Link to="/blog" className="navbar-link">Blog</Link>
