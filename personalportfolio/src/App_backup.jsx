@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css'
 import profileImg from './assets/photo_2025-07-20_01-04-46.jpg';
 import akmessageImg from './assets/message .png';
@@ -8,81 +8,13 @@ import { FaLinkedin, FaGithub, FaFacebook, FaInstagram, FaXTwitter, FaReact, FaJ
 import { SiGraphql, SiFlutter } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
-// Lazy load heavy images
-const LazyImage = ({ src, alt, className, onClick }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [inView, setInView] = useState(false);
-  const imgRef = useRef();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={imgRef} className={className} onClick={onClick}>
-      {inView && (
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          onLoad={() => setLoaded(true)}
-          style={{
-            opacity: loaded ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        />
-      )}
-      {!loaded && inView && (
-        <div style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: '#f3e6d6',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#7a4a1e'
-        }}>
-          Loading...
-        </div>
-      )}
-    </div>
-  );
-};
-
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showProjects, setShowProjects] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [enableAnimations, setEnableAnimations] = useState(false);
   const vantaRef = useRef(null);
   const vantaEffect = useRef(null);
-
-  // Check for reduced motion preference and performance
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const connectionSpeed = navigator.connection?.effectiveType;
-    const isSlowConnection = connectionSpeed === 'slow-2g' || connectionSpeed === '2g';
-    
-    setEnableAnimations(!prefersReducedMotion && !isSlowConnection);
-  }, []);
 
   useEffect(() => {
     let scriptThree, scriptVanta;
@@ -154,7 +86,14 @@ function App() {
       </nav>
       <header className="portfolio-header animated-header-bg">
         <div className="portfolio-header-left">
-          <div className="portfolio-greeting">👋 Hi, I’m Akalewold!</div>
+          <div className="portfolio-greeting">
+            <span className="greeting-text">👋 Hi, I'm Akalewold!</span>
+            <div className="sparkles">
+              <span className="sparkle">✨</span>
+              <span className="sparkle">⭐</span>
+              <span className="sparkle">💫</span>
+            </div>
+          </div>
           <img
             src={profileImg}
             alt="Akalewold Magera profile photo"
@@ -181,10 +120,10 @@ function App() {
         </div>
         <div className="portfolio-header-details">
           <p className="portfolio-bio">
-            I’m a software developer passionate about building tools and experiences that make life better. I enjoy turning ideas into scalable, maintainable applications.<br /><br />
+            I'm a software developer passionate about building tools and experiences that make life better. I enjoy turning ideas into scalable, maintainable applications.<br /><br />
             I work with modern web technologies, backend frameworks, databases, and all things that make software robust and user-friendly.<br /><br />
             Outside of tech, I love playing video games, reading books, and staying active—especially on the football field.<br /><br />
-            I care deeply about writing clean code, learning in public, and exploring how tech can be used for good. While I work on a variety of projects, I’m especially curious about systems that improve urban life, digital tools for productivity, and the open-source ecosystem.
+            I care deeply about writing clean code, learning in public, and exploring how tech can be used for good. While I work on a variety of projects, I'm especially curious about systems that improve urban life, digital tools for productivity, and the open-source ecosystem.
           </p>
           <section className="portfolio-section techstack-section">
             <h2>Tech Stack</h2>
@@ -223,7 +162,7 @@ function App() {
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-content">
-            <img src={profileImg} alt="Akalewold Magera" className="modal-photo" loading="lazy" />
+            <img src={profileImg} alt="Akalewold Magera" className="modal-photo" />
           </div>
         </div>
       )}
@@ -250,11 +189,7 @@ function App() {
         <div className="project-list project-cards">
           <div className="project-card">
             <a href="https://github.com/AKXtreme/akmessage" target="_blank" rel="noopener noreferrer">
-              <LazyImage 
-                src={akmessageImg} 
-                alt="Screenshot of Akmessage chat application" 
-                className="project-image" 
-              />
+              <img src={akmessageImg} alt="Screenshot of Akmessage chat application" className="project-image" />
             </a>
             <div className="project-info">
               <strong>Akmessage</strong>
@@ -263,11 +198,7 @@ function App() {
           </div>
           <div className="project-card">
             <a href="https://github.com/AKXtreme/springboot-todo-app" target="_blank" rel="noopener noreferrer">
-              <LazyImage 
-                src={todoImg} 
-                alt="Screenshot of Todo App project" 
-                className="project-image" 
-              />
+              <img src={todoImg} alt="Screenshot of Todo App project" className="project-image" />
             </a>
             <div className="project-info">
               <strong>Todo App</strong>
@@ -276,11 +207,7 @@ function App() {
           </div>
           <div className="project-card">
             <a href="#" target="_blank" rel="noopener noreferrer">
-              <LazyImage 
-                src={mapImg} 
-                alt="Screenshot of Addis Ababa Map Application project" 
-                className="project-image" 
-              />
+              <img src={mapImg} alt="Screenshot of Addis Ababa Map Application project" className="project-image" />
             </a>
             <div className="project-info">
               <strong>Addis Ababa Map Application</strong>
@@ -289,40 +216,17 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="portfolio-section testimonials-section">
-        <h2 className="testimonials-title">Testimonials</h2>
-        <div className="testimonials-list">
-          <div className="testimonial-card">
-            <p className="testimonial-quote">“Akalewold is a dedicated developer who always delivers clean, maintainable code. He’s a pleasure to work with!”</p>
-            <div className="testimonial-author">— Sarah T., Senior Engineer</div>
-          </div>
-          <div className="testimonial-card">
-            <p className="testimonial-quote">“His attention to detail and passion for learning new technologies make him a standout team member.”</p>
-            <div className="testimonial-author">— Michael B., Project Manager</div>
-          </div>
-          <div className="testimonial-card">
-            <p className="testimonial-quote">“Akalewold’s work on our web app was outstanding. He communicates clearly and meets every deadline.”</p>
-            <div className="testimonial-author">— Lina K., Product Owner</div>
-          </div>
-        </div>
-      </section>
-      <footer className="portfolio-footer always-footer">
-        <div className="contact-icons">
-          <a href="https://www.linkedin.com/in/akalewold-magera-51200228b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="https://github.com/AKXtreme" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
-          <a href="https://www.facebook.com/share/16ri9J9Q6D/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebook /></a>
-          <a href="https://www.instagram.com/akalewoldak?igsh=Mm9haXk2azRxOW04" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-          <a href="https://x.com/akalewoldx?t=_lL70lqxjBCDsZoy8gtyFw&s=09" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><FaXTwitter /></a>
-      </div>
-        <button className="back-to-top-btn" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} aria-label="Back to top">
-          Back to top
-        </button>
-        <div className="footer-copyright">
-          &copy; {new Date().getFullYear()} Akalewold Magera. All rights reserved.
-      </div>
+      <button 
+        className="back-to-top-btn" 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑ Back to Top
+      </button>
+      <footer className="portfolio-footer">
+        <div className="footer-copyright">© 2025 Akalewold Magera. All rights reserved.</div>
       </footer>
     </main>
-  )
+  );
 }
 
 export default App
