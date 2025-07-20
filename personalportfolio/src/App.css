@@ -713,6 +713,12 @@ h2, h3 {
     width: 100vw;
     max-width: 100vw;
     overflow-x: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   html, body {
     width: 100vw;
@@ -1232,22 +1238,7 @@ button:hover, .back-to-top-btn:hover, .notfound-home-btn:hover {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
-.portfolio-header > * {
-  position: relative;
-  z-index: 1;
-}
-.portfolio-greeting {
-  font-size: 1.35rem;
-  color: #7a4a1e;
-  font-weight: 700;
-  margin-bottom: 1.1rem;
-  letter-spacing: 0.01em;
-  background: rgba(255, 247, 239, 0.7);
-  border-radius: 1.2rem;
-  padding: 0.4em 1.2em;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
+
 
 /* Fade-slide-in animation */
 @keyframes fadeSlideIn {
@@ -1317,15 +1308,13 @@ a, .navbar-link {
 
 @media (max-width: 700px) {
   .blog-container {
-    padding-top: 2.5rem;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    box-sizing: border-box;
     width: 100vw;
     max-width: 100vw;
-    overflow-x: hidden;
     margin-left: auto;
     margin-right: auto;
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1338,7 +1327,11 @@ a, .navbar-link {
     gap: 1.2rem;
   }
   .blog-post-card {
+    width: 98vw;
+    max-width: 98vw;
     margin-left: 0;
     margin-right: 0;
+    padding: 1rem 0.7rem 0.7rem 0.7rem;
+    box-sizing: border-box;
   }
 }
