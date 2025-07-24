@@ -12,7 +12,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg}'],
+        globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,svg}'],
+        skipWaiting: true,
+        clientsClaim: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
@@ -26,6 +28,9 @@ export default defineConfig({
             },
           },
         ],
+      },
+      devOptions: {
+        enabled: false,
       },
       manifest: {
         name: 'Akalewold Magera Portfolio',
