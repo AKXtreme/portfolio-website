@@ -2,37 +2,94 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     
     <!-- Performance optimizations -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="dns-prefetch" href="//linkedin.com">
     
-    <!-- Preload critical images -->
-    <link rel="preload" href="/src/assets/photo_2025-07-20_01-04-46.jpg" as="image" type="image/jpeg">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/assets/a.jpg" as="image" type="image/jpeg" fetchpriority="high">
+    <link rel="preload" href="/src/App.css" as="style">
     
-    <!-- Resource hints for faster loading -->
+    <!-- Resource hints for secondary assets -->
     <link rel="prefetch" href="/src/assets/message .png">
     <link rel="prefetch" href="/src/assets/todo.png">
     <link rel="prefetch" href="/src/assets/map.png">
+    <link rel="prefetch" href="/resume.pdf">
     
-    <title>Akalewold Magera | Portfolio</title>
-    <meta name="description" content="Akalewold Magera's personal portfolio. Software developer, project showcase, skills, and contact information." />
-    <meta property="og:title" content="Akalewold Magera | Portfolio" />
-    <meta property="og:description" content="Akalewold Magera's personal portfolio. Software developer, project showcase, skills, and contact information." />
+    <!-- Critical CSS inline -->
+    <style>
+      /* Critical above-the-fold styles */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+      body { 
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+        line-height: 1.6; 
+        overflow-x: hidden;
+        background: #ffffff;
+        color: #1a202c;
+      }
+      .portfolio-container { min-height: 100vh; }
+      .loading-fallback { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        height: 100vh; 
+        font-size: 18px; 
+        color: #4a5568;
+      }
+    </style>
+    
+    <title>Akalewold Magera - Full-Stack Developer | Portfolio</title>
+    <meta name="description" content="Akalewold Magera - Full-Stack Developer specializing in React, Spring Boot, and modern web technologies. Computer Science graduate with expertise in enterprise applications and real-time systems." />
+    <meta name="keywords" content="Akalewold Magera, Full-Stack Developer, React, Spring Boot, Java, JavaScript, Portfolio, Software Engineer, Computer Science" />
+    <meta name="author" content="Akalewold Magera" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://your-portfolio-url.com" />
-    <meta property="og:image" content="/assets/photo_2025-07-20_01-04-46.jpg" />
+    <meta property="og:title" content="Akalewold Magera - Full-Stack Developer | Portfolio" />
+    <meta property="og:description" content="Full-Stack Developer specializing in React, Spring Boot, and modern web technologies. View my projects and experience." />
+    <meta property="og:url" content="https://akalewold-portfolio.netlify.app" />
+    <meta property="og:image" content="/src/assets/a.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Akalewold Magera Portfolio" />
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Akalewold Magera | Portfolio" />
-    <meta name="twitter:description" content="Akalewold Magera's personal portfolio. Software developer, project showcase, skills, and contact information." />
-    <meta name="twitter:image" content="/assets/photo_2025-07-20_01-04-46.jpg" />
+    <meta name="twitter:title" content="Akalewold Magera - Full-Stack Developer" />
+    <meta name="twitter:description" content="Full-Stack Developer specializing in React, Spring Boot, and modern web technologies." />
+    <meta name="twitter:image" content="/src/assets/a.jpg" />
+    <meta name="twitter:creator" content="@akalewoldx" />
+    
+    <!-- Additional SEO and performance meta tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href="https://akalewold-portfolio.netlify.app" />
+    
+    <!-- Prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+      // Theme detection before render
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loading-fallback">Loading...</div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

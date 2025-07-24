@@ -5,9 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:fresh": "./clear-cache.sh",
     "build": "vite build",
+    "build:optimized": "./build-optimized.sh",
+    "build:analyze": "vite build && npx vite-bundle-analyzer dist",
+    "preview": "vite preview",
+    "preview:network": "vite preview --host",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix",
+    "test:performance": "node test-performance.js",
+    "optimize:images": "node optimize-images.js",
+    "clear:cache": "./clear-cache.sh"
   },
   "dependencies": {
     "react": "^19.1.0",
